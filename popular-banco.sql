@@ -1,8 +1,8 @@
 -- Criação do banco de dados
-CREATE DATABASE IF NOT EXISTS contact-list;
+CREATE DATABASE IF NOT EXISTS `contact-list`;
 
 -- Seleciona o banco
-USE contact-list;
+USE `contact-list`;
 
 -- Criação das tabelas
 
