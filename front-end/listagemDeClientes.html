@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html class="light" lang="pt-BR">
+   <head>
+      <meta charset="utf-8"/>
+      <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+      <title>Gerenciador de Contatos | Comércio S.A.</title>
+      <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+      <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+      <script id="tailwind-config">
+         tailwind.config = {
+             darkMode: "class",
+             theme: {
+                 extend: {
+                     "colors": {
+                         "primary": "#003399",
+                         "primary-dark": "#002068",
+                         "accent": "#F28433",
+                         "background": "#f4f7fa",
+                         "surface": "#ffffff",
+                         "on-surface": "#191c1e",
+                         "on-surface-variant": "#454652",
+                         "outline-variant": "#c5c5d4"
+                     },
+                     "borderRadius": {
+                         "DEFAULT": "1rem",
+                         "lg": "2rem",
+                         "xl": "3rem",
+                         "full": "9999px"
+                     },
+                     "fontFamily": {
+                         "headline": ["Manrope"],
+                         "body": ["Inter"],
+                         "label": ["Inter"]
+                     },
+                     "boxShadow": {
+                         "card": "0 10px 25px -5px rgba(0, 32, 104, 0.08), 0 8px 10px -6px rgba(0, 32, 104, 0.05)",
+                     }
+                 },
+             },
+         }
+      </script>
+      <style>
+         .material-symbols-outlined {
+         font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+         vertical-align: middle;
+         }
+         body { font-family: 'Inter', sans-serif; }
+         h1, h2, h3, .headline { font-family: 'Manrope', sans-serif; }
+         .glass-nav {
+         backdrop-filter: blur(20px);
+         -webkit-backdrop-filter: blur(20px);
+         }
+      </style>
+   </head>
+   <body class="bg-background text-on-surface min-h-screen flex">
+      <!-- NavBar Lateral -->
+      <aside class="fixed left-0 top-0 h-screen w-64 z-50 bg-[#002068] dark:bg-slate-950 flex flex-col p-6 space-y-4 hidden md:flex">
+         <div class="px-2 mb-6">
+            <div class="flex items-center gap-4">
+
+                <!-- Logo -->
+                <div class="w-16 h-16 flex items-center justify-center shrink-0">
+                    <img 
+                        src="images/logo-comercio.png"
+                        alt="Comércio S.A. Logo"
+                        class="w-full h-full object-cover rounded-lg"
+                    />
+                </div>
+
+                <!-- Texto -->
+                <div>
+                    <span class="text-xl font-extrabold text-white block leading-tight tracking-tight">
+                        Agenda de Contatos
+                    </span>
+                    <span class="font-['Manrope'] text-[11px] font-bold uppercase tracking-[0.15em] text-blue-300/80">
+                        Comércio S.A.
+                    </span>
+                </div>
+
+            </div>
+        </div>
+         <div class="py-4">
+            <button onclick="window.location.href='cadastroDeClientes.html'" class="w-full py-3 bg-[#F28433] text-white rounded-lg font-bold shadow-lg hover:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined">person_add</span>
+            <span class="font-['Manrope'] text-sm">Novo Cliente</span>
+            </button>
+         </div>
+         <nav class="flex-1 space-y-1">
+            <a href="listagemDeClientes.html" class="w-full py-3 bg-white text-black rounded-lg font-bold shadow-sm hover:bg-slate-50 hover:scale-[0.98] transition-transform flex items-center justify-center gap-2" href="#">
+            <span class="material-symbols-outlined">group</span>
+            <span class="font-['Manrope'] text-sm">Listar Clientes</span>
+            </a>
+         </nav>
+      </aside>
+      <!-- Main -->
+      <main class="flex-1 flex flex-col min-w-0 md:ml-64">
+         <!-- TopAppBar -->
+         <header class="fixed top-0 right-0 w-full z-40 bg-white border-b border-slate-200/60 shadow-sm flex justify-between items-center px-8 md:pl-[18rem] py-4">
+            <div class="flex items-center gap-6 flex-1 mr-8">
+               <div class="flex bg-slate-100 dark:bg-slate-800 rounded-full px-5 py-2 items-center gap-3 w-full border border-slate-200 shadow-inner group transition-all focus-within:bg-white focus-within:shadow-md focus-within:border-[#003399]/30">
+                  <span class="material-symbols-outlined text-slate-500 group-focus-within:text-[#003399]">search</span>
+                  <input id="inputBusca" class="bg-transparent border-none focus:ring-0 text-sm font-medium placeholder:text-slate-400 w-full" placeholder="Buscar por nome ou cpf..." type="text"/>
+               </div>
+            </div>
+         </header>
+         <!-- Conteúdo Principal -->
+         <div class="space-y-6 pl-8 pr-2 py-8 mt-24">
+            <div class="flex items-center justify-between px-4">
+               <div class="flex items-center gap-4">
+                  <h1 class="text-2xl font-black tracking-tight text-[#002068]">Contatos</h1>
+                    <span id="contadorClientes" class="text-xs font-bold text-slate-600 bg-slate-200/60 px-3 py-1 rounded-full">
+                        Carregando...
+                    </span>
+               </div>
+               <div class="flex items-center gap-3">
+                  <button onclick="window.location.href='cadastroDeClientes.html'" class="flex items-center gap-2 px-4 py-2 bg-[#F28433] hover:bg-[#e0752b] text-white rounded-lg font-bold text-sm shadow-md transition-all">
+                  <span class="material-symbols-outlined text-lg">add</span>
+                  <span>Adicionar Cliente</span>
+                  </button>
+               </div>
+            </div>
+               <div id="listaClientes" class="space-y-6">
+                  <!-- preenchido pelo JS -->
+               </div>
+
+               <div id="paginacao" class="pt-8 pb-20 md:pb-8"></div>
+
+            </div>
+         </main>
+      <!-- BottomNavBar -->
+      <nav class="md:hidden fixed bottom-0 left-0 right-0 glass-nav bg-white/90 dark:bg-slate-900/90 px-6 py-4 flex justify-between items-center z-50 border-t border-slate-200">
+         <button class="flex flex-col items-center gap-1 text-[#003399]">
+         <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">group</span>
+         <span class="text-[10px] font-bold">Clientes</span>
+         </button>
+         <div class="-mt-12">
+            <button class="w-14 h-14 bg-[#F28433] text-white rounded-full shadow-lg flex items-center justify-center border-4 border-background">
+            <span class="material-symbols-outlined">add</span>
+            </button>
+         </div>
+         <button class="flex flex-col items-center gap-1 text-slate-500">
+         <span class="material-symbols-outlined">search</span>
+         <span class="text-[10px] font-bold">Busca</span>
+         </button>
+      </nav>
+      <script src="js/api.js"></script>
+      <script src="js/validacao.js"></script>
+      <script src="js/render.js"></script>
+      <script src="js/app.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                carregarClientes();
+                document.getElementById('inputBusca').addEventListener('input', e => {
+                    const t = e.target.value.trim();
+                    t ? buscarClientes(t) : carregarClientes();
+                });
+            });
+        </script>
+   </body>
+</html>

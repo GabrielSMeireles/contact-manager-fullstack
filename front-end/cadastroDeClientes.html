@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html class="light" lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Novo Cliente - Comércio S.A.</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+              extend: {
+                "colors": {
+                        "primary": "#003399",       
+                        "primary-dark": "#002068",
+                        "accent": "#F28433",
+                        "background": "#f4f7fa",
+                        "surface": "#ffffff",
+                        "on-surface": "#191c1e",
+                        "on-surface-variant": "#454652",
+                        "outline-variant": "#c5c5d4"
+                },
+                "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                },
+                "fontFamily": {
+                        "headline": ["Manrope"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                },
+                "boxShadow": {
+                    "card": "0 10px 25px -5px rgba(0, 32, 104, 0.08), 0 8px 10px -6px rgba(0, 32, 104, 0.05)",
+                }
+              },
+            },
+          }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-input:focus {
+            outline: none;
+            border-color: #003399;
+            box-shadow: 0 0 0 2px rgba(0, 51, 153, 0.1);
+        }
+
+        .border-red-400 {
+            border-color: #f87171 !important;
+        }
+        .bg-red-50 {
+            background-color: #fef2f2 !important;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-surface flex min-h-screen">
+    <!-- NavBar Lateral -->
+    <aside class="fixed left-0 top-0 h-screen w-64 z-50 bg-[#002068] flex flex-col p-6 space-y-4">
+        <div class="px-2 mb-6">
+            <div class="flex items-center gap-4">
+
+                <!-- Logo -->
+                <div class="w-16 h-16 flex items-center justify-center shrink-0">
+                    <img 
+                        src="images/logo-comercio.png"
+                        alt="Comércio S.A. Logo"
+                        class="w-full h-full object-cover rounded-lg"
+                    />
+                </div>
+
+                <!-- Texto -->
+                <div>
+                    <span class="text-xl font-extrabold text-white block leading-tight tracking-tight">
+                        Agenda de Contatos
+                    </span>
+                    <span class="font-['Manrope'] text-[11px] font-bold uppercase tracking-[0.15em] text-blue-300/80">
+                        Comércio S.A.
+                    </span>
+                </div>
+
+            </div>
+        </div>
+        <div class="py-4">
+            <button class="w-full py-3 bg-[#F28433] text-white rounded-lg font-bold shadow-lg hover:scale-[0.98] transition-transform flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined">person_add</span>
+                <span class="font-['Manrope'] text-sm">Novo Cliente</span>
+            </button>
+        </div>
+        <nav class="flex-1 space-y-1">
+            <a href="listagemDeClientes.html" class="w-full py-3 bg-white text-black rounded-lg font-bold shadow-sm hover:bg-slate-50 hover:scale-[0.98] transition-transform flex items-center justify-center gap-2" href="#">
+                <span class="material-symbols-outlined">group</span>
+                <span class="font-['Manrope'] text-sm">Listar Clientes</span>
+            </a>
+        </nav>
+    </aside>
+    <!-- Main -->
+    <main class="flex-1 ml-64 min-w-0">
+        <!-- TopAppBar Placeholder -->
+        <div class="p-8 max-w-5xl mx-auto">
+            <header class="mb-8 px-4">
+                <h1 class="text-3xl font-black text-[#002068] tracking-tight mb-2">Novo Cliente</h1>
+                <p class="text-slate-500 font-medium">Preencha os dados abaixo para registrar um novo parceiro comercial.</p>
+            </header>
+            <section class="space-y-6">
+                <!-- Form Card 1: Informações Básicas -->
+                 <form onsubmit="salvarCliente(event)">
+                    <div class="bg-white rounded-2xl p-8 shadow-card border border-slate-200/50">
+                        <div class="flex items-center gap-2 mb-8 text-[#002068]">
+                            <span class="material-symbols-outlined text-xl">badge</span>
+                            <h3 class="text-lg font-extrabold tracking-tight">Informações Básicas</h3>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                            <!-- Nome -->
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Nome Completo <span class="text-red-500">*</span></label>
+                            <input id="nome" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold" placeholder="Ex: Maria Oliveira Silva" type="text"/>
+                        </div>
+
+                        <!-- CPF -->
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">CPF <span class="text-red-500">*</span></label>
+                            <input id="cpf" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold" placeholder="000.000.000-00" type="text"/>
+                        </div>
+
+                        <!-- Data de Nascimento -->
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Data de Nascimento</label>
+                            <input id="data_nascimento" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold" type="date"/>
+                        </div>
+
+                        <!--  Endereço -->
+                        <div class="md:col-span-2 flex items-center gap-2 pt-4 pb-1 text-[#002068] border-t border-slate-100">
+                            <span class="material-symbols-outlined text-xl">location_on</span>
+                            <h3 class="text-base font-extrabold tracking-tight">Endereço</h3>
+                        </div>
+
+                        <!-- CEP -->
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">CEP</label>
+                            <input id="cep" type="text" maxlength="9" placeholder="00000-000"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold"
+                                oninput="mascararCep(this)" onblur="buscarCep()"/>
+                        </div>
+
+                        <!-- Estado -->
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Estado</label>
+                            <input id="estado" type="text" maxlength="2" placeholder="SP"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold"/>
+                        </div>
+
+                        <!-- Logradouro -->
+                        <div class="space-y-2 md:col-span-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Logradouro</label>
+                            <input id="logradouro" type="text" placeholder="Rua, Avenida..."
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold"/>
+                        </div>
+
+                        <!-- Número -->
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Número</label>
+                            <input id="numero" type="text" placeholder="123"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold"/>
+                        </div>
+
+                        <!-- Complemento -->
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Complemento</label>
+                            <input id="complemento" type="text" placeholder="Apto, Bloco..."
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold"/>
+                        </div>
+
+                        <!-- Bairro -->
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Bairro</label>
+                            <input id="bairro" type="text" placeholder="Centro"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold"/>
+                        </div>
+
+                        <!-- Cidade -->
+                        <div class="space-y-2">
+                            <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Cidade</label>
+                            <input id="cidade" type="text" placeholder="São Paulo"
+                                class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3 custom-input transition-all text-sm font-semibold"/>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- Form Card 2: Contatos -->
+                    <div class="bg-white rounded-2xl p-8 shadow-card border border-slate-200/50 mt-6">
+                        <div class="flex items-center gap-2 mb-8 text-[#002068]">
+                            <span class="material-symbols-outlined text-xl">contact_mail</span>
+                            <h3 class="text-lg font-extrabold tracking-tight">Contatos</h3>
+                        </div>
+                        <span class="text-xs font-semibold text-slate-400 bg-slate-100 px-3 py-1 rounded-full">
+                            Opcional
+                        </span>
+                        <p class="text-xs text-slate-400 font-medium mt-4 mb-6">
+                            Caso queira cadastrar um contato, preencha ao menos o <span class="font-bold">Tipo</span> e o <span class="font-bold">Valor</span>.
+                        </p>
+                        <div class="space-y-4">
+                            <div id="blocoContatoFixo" class="bg-slate-50 p-6 rounded-2xl border border-slate-100 grid grid-cols-1 md:grid-cols-12 gap-6 items-end">
+                                <div class="md:col-span-3 space-y-2">
+                                    <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Tipo <span class="text-red-500">*</span></label>
+                                    <select id="tipo" onchange="atualizarPlaceholder('valor', this.value)"
+                                        class="w-full bg-white border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-[#003399]/10 focus:border-[#003399] outline-none appearance-none">
+                                        <option value="">Selecione...</option>
+                                        <option>E-mail</option>
+                                        <option>Telefone</option>
+                                    </select>
+                                </div>
+                                <div class="md:col-span-4 space-y-2">
+                                    <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Valor <span class="text-red-500">*</span></label>
+                                    <input id="valor" type="text" class="w-full bg-white border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-[#003399]/10 focus:border-[#003399] outline-none" placeholder="maria@exemplo.com" />
+                                </div>
+                                <div class="md:col-span-5 space-y-2">
+                                    <label class="text-[10px] font-bold tracking-widest text-slate-500 uppercase">Observação</label>
+                                    <input id="observacao" type="text" class="w-full bg-white border border-slate-200 rounded-xl p-3 text-sm font-semibold focus:ring-2 focus:ring-[#003399]/10 focus:border-[#003399] outline-none" placeholder="Pessoal" />
+                                </div>
+                            </div>
+
+                            <div id="contatosExtras"></div>
+
+                            <button type="button" onclick="adicionarContatoExtra()"
+                                class="w-full flex items-center justify-center gap-2 p-4 border-2 border-dashed border-slate-200 rounded-2xl hover:bg-blue-50 hover:border-[#003399]/40 text-slate-500 hover:text-[#003399] transition-all font-bold text-sm">
+                                <span class="material-symbols-outlined">add_circle</span> Adicionar Novo Contato
+                            </button>
+                        </div>
+                    </div>
+                
+                <!-- Botões de Ação -->
+                <div class="flex items-center justify-end gap-4 pt-6">
+                    <button type="button" onclick="window.location.href='listagemDeClientes.html'" class="px-8 py-3 bg-white border border-slate-200 text-slate-600 rounded-xl font-bold text-sm hover:bg-slate-50 transition-all shadow-sm">
+                        Cancelar
+                    </button>
+                    <button type="submit" class="px-10 py-3 bg-[#F28433] hover:bg-[#e0752b] text-white font-extrabold rounded-xl shadow-lg shadow-orange-200/40 hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center gap-2">
+                        <span class="material-symbols-outlined">save</span> Salvar Cliente
+                    </button>
+                </div>
+                </form>
+            </section>
+        </div>
+    </main>
+</body>
+<script src="js/api.js"></script>
+<script src="js/validacao.js"></script>
+<script src="js/render.js"></script>
+<script src="js/app.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        carregarClienteParaEdicao();
+    });
+</script>
+</html>
